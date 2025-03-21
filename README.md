@@ -84,3 +84,52 @@ The web client is implemented using [React](https://react.dev/), with:
 - [vanilla-extract](https://vanilla-extract.style/) for stylesheets
 
 The Python API communicates via [msgpack](https://msgpack.org/index.html) and [websockets](https://websockets.readthedocs.io/en/stable/index.html).
+
+# Forest Pointcloud Visualizer
+
+A simple web-based visualizer for forest pointcloud data built with viser.
+
+## Installation
+
+1. Install the required dependencies:
+```bash
+pip install viser numpy
+```
+
+## Usage
+
+1. Run the visualizer:
+```bash
+python forest_visualizer.py
+```
+
+2. Open your web browser and navigate to:
+```
+http://localhost:8080
+```
+
+3. Use the GUI controls to:
+   - Upload XYZ pointcloud files
+   - Adjust point size
+   - Change coloring mode (Height-based or Uniform)
+   - Transform the pointcloud (scale and position)
+
+## Input File Format
+
+The visualizer accepts XYZ files where each line contains at least 3 space-separated numbers representing the X, Y, and Z coordinates of each point:
+
+```
+x1 y1 z1
+x2 y2 z2
+...
+xn yn zn
+```
+
+## Features
+
+- Interactive 3D visualization
+- Height-based or uniform coloring
+- Adjustable point size
+- Transform controls
+- Real-time updates
+- Simple and intuitive GUI
