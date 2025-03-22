@@ -106,9 +106,9 @@ TVector = TypeVar("TVector", bound=tuple)
 
 def cast_vector(vector: TVector | np.ndarray, length: int) -> TVector:
     if not isinstance(vector, tuple):
-        assert cast(np.ndarray, vector).shape == (length,), (
-            f"Expected vector of shape {(length,)}, but got {vector.shape} instead"
-        )
+        assert cast(np.ndarray, vector).shape == (
+            length,
+        ), f"Expected vector of shape {(length,)}, but got {vector.shape} instead"
     return cast(TVector, tuple(map(float, vector)))
 
 
@@ -174,9 +174,11 @@ class SceneApi:
 
     def set_up_direction(
         self,
-        direction: Literal["+x", "+y", "+z", "-x", "-y", "-z"]
-        | tuple[float, float, float]
-        | np.ndarray,
+        direction: (
+            Literal["+x", "+y", "+z", "-x", "-y", "-z"]
+            | tuple[float, float, float]
+            | np.ndarray
+        ),
     ) -> None:
         """Set the global up direction of the scene. By default we follow +Z-up
         (similar to Blender, 3DS Max, ROS, etc), the most common alternative is
@@ -488,19 +490,21 @@ class SceneApi:
 
     def set_environment_map(
         self,
-        hdri: None
-        | Literal[
-            "apartment",
-            "city",
-            "dawn",
-            "forest",
-            "lobby",
-            "night",
-            "park",
-            "studio",
-            "sunset",
-            "warehouse",
-        ] = "warehouse",
+        hdri: (
+            None
+            | Literal[
+                "apartment",
+                "city",
+                "dawn",
+                "forest",
+                "lobby",
+                "night",
+                "park",
+                "studio",
+                "sunset",
+                "warehouse",
+            ]
+        ) = "warehouse",
         background: bool = False,
         background_blurriness: float = 0.0,
         background_intensity: float = 1.0,
@@ -1064,9 +1068,9 @@ class SceneApi:
             Handle for manipulating scene node.
         """
         colors_cast = colors_to_uint8(np.asarray(colors))
-        assert len(points.shape) == 2 and points.shape[-1] == 3, (
-            "Shape of points should be (N, 3)."
-        )
+        assert (
+            len(points.shape) == 2 and points.shape[-1] == 3
+        ), "Shape of points should be (N, 3)."
         assert colors_cast.shape in {
             points.shape,
             (3,),
